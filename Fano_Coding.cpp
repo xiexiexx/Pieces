@@ -10,7 +10,7 @@ std::vector<double> P;			// 概率向量.
 std::vector<std::string> C;		// 编码向量, 具体使用时C要比P多一个元素用于哨兵.
 
 // 划分的下标范围是[L, R), 我们需要将该区间划分成[L, S), [S, R), 使得差值最小.
-// 调用此函数的要求是区间非空, 也就是L <= R. 
+// 调用此函数的要求是区间非空, 也就是L < R. 
 size_t partiton(size_t L, size_t R)
 {
 	size_t S = L;		// 划分初始设定.
@@ -51,16 +51,13 @@ void example()
 	// 概率值设定.
 	P = { 0.125, 0.125, 0.125, 0.5, 0.125 };
 	// 注意: 如果概率向量只有一个元素, 编码为空字符串.
-	if (P.size() > 0)
-	{
-		// Fano编码要求对概率进行排序.
-		sort(P.begin(), P.end());
-		// C多预留一个哨兵值, 以保证不会出现超出边界的赋值错误.
-		C.resize(P.size() + 1);
-		C[0] = "";		// 编码初值为空字符串.
-		Fano_Coding(0, P.size());
-		C.pop_back();	// 将哨兵去除.
-	}
+	// Fano编码要求对概率进行排序.
+	sort(P.begin(), P.end());
+	// C中多预留一个哨兵值, 以保证不会出现超出边界的赋值错误, 这样亦可解决空概率向量的问题
+	C.resize(P.size() + 1);
+	C[0] = "";		// 编码初值为空字符串.
+	Fano_Coding(0, P.size());
+	C.pop_back();	// 将哨兵去除.
 	for (size_t i = 0; i < C.size(); ++i)
 		std::cout << C[i] << std::endl;
 }
