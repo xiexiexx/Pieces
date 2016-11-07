@@ -29,8 +29,8 @@ void HuffmanTree::HuffmanCoding(std::vector<double>& P, std::vector<std::string>
 	sort(P.begin(), P.end());
 	// 一次性给出所有在编码中会出现的结点.
 	std::vector <HuffmanNode> data(2 * P.size() - 1);
-	std::queue<HuffmanNode*> QNODE;	// 待编码的结点指针.
-	std::queue<HuffmanNode*> QTREE;	// 编码过程中形成的树指针.
+	std::queue<HuffmanNode*> QNODE;	// 待编码的结点指针队列.
+	std::queue<HuffmanNode*> QTREE;	// 编码过程中形成的树指针队列.
 	
 	// index作为编号, 指示当前会使用data[index]处的结点.
 	size_t index;		// 注意其作用域不仅限于下面的for循环.
@@ -69,7 +69,7 @@ void HuffmanTree::HuffmanCoding(std::vector<double>& P, std::vector<std::string>
 		// 处理新结点数据, 编号统一为HC.size().
 		data[index] = { Childs[0]->weight + Childs[1]->weight, HC.size(), Childs[0], Childs[1] };
 		HuffmanNode* p = &data[index];
-		// 将新树放入队列HT中.
+		// 将新树放入队列QTREE中.
 		QTREE.push(p);
 		// 编号更新, 下次使用新结点.
 		++index;
