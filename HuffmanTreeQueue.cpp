@@ -5,14 +5,14 @@
 
 void HuffmanTree::CodingAll(HuffmanNode* p, const std::string& prefix)
 {
-	// Èôp²»ÎªNULLÔòµİ¹é¶ÔÒÔpÎª¸ùµÄ×ÓÊ÷ËùÓĞ½áµã½øĞĞ±àÂë
+	// è‹¥pä¸ä¸ºNULLåˆ™é€’å½’å¯¹ä»¥pä¸ºæ ¹çš„å­æ ‘æ‰€æœ‰ç»“ç‚¹è¿›è¡Œç¼–ç 
 	if (p != NULL)
 	{
-		// ½áµãpµÄ×ó×ÓÊ÷ËùÓĞÇ°×ºÊÇprefixÅä0
+		// ç»“ç‚¹pçš„å·¦å­æ ‘æ‰€æœ‰å‰ç¼€æ˜¯prefixé…0
 		CodingAll(p->lChild, prefix + "0");
-		// ½áµãpµÄÓÒ×ÓÊ÷ËùÓĞÇ°×ºÊÇprefixÅä1
+		// ç»“ç‚¹pçš„å³å­æ ‘æ‰€æœ‰å‰ç¼€æ˜¯prefixé…1
 		CodingAll(p->rChild, prefix + "1");
-		// Ò¶×Ó½áµã±àºÅÎª×ÔÈ»Êı, ÒÔ´Ë¶Ô±àÂëÏòÁ¿ÏàÓ¦Î»ÖÃ¸³Âë×Öprefix.
+		// å¶å­ç»“ç‚¹ç¼–å·ä¸ºè‡ªç„¶æ•°, ä»¥æ­¤å¯¹ç¼–ç å‘é‡ç›¸åº”ä½ç½®èµ‹ç å­—prefix.
 		if (p->number < HC.size())
 			HC[p->number] = prefix;
 	}
@@ -20,61 +20,61 @@ void HuffmanTree::CodingAll(HuffmanNode* p, const std::string& prefix)
 
 void HuffmanTree::HuffmanCoding(std::vector<double>& P, std::vector<std::string>& C)
 {
-	// ºóĞø´¦Àí¿É±£Ö¤P.size() > 1, ·ñÔò²»½øĞĞ±àÂëÖ±½Ó·µ»Ø.
+	// åç»­å¤„ç†å¯ä¿è¯P.size() > 1, å¦åˆ™ä¸è¿›è¡Œç¼–ç ç›´æ¥è¿”å›.
 	if (P.size() <= 1)
 		return;		
-	// ±àÂëÏòÁ¿HCµÄ³¤¶ÈÉèÖÃÎª¸ÅÂÊÏòÁ¿µÄ³¤¶È.
+	// ç¼–ç å‘é‡HCçš„é•¿åº¦è®¾ç½®ä¸ºæ¦‚ç‡å‘é‡çš„é•¿åº¦.
 	HC.resize(P.size());
-	// ¶Ô¸ÅÂÊÏòÁ¿½øĞĞÅÅĞò.
+	// å¯¹æ¦‚ç‡å‘é‡è¿›è¡Œæ’åº.
 	sort(P.begin(), P.end());
-	// Ò»´ÎĞÔ¸ø³öËùÓĞÔÚ±àÂëÖĞ»á³öÏÖµÄ½áµã.
+	// ä¸€æ¬¡æ€§ç»™å‡ºæ‰€æœ‰åœ¨ç¼–ç ä¸­ä¼šå‡ºç°çš„ç»“ç‚¹.
 	std::vector <HuffmanNode> data(2 * P.size() - 1);
-	std::queue<HuffmanNode*> QN;	// ´ı±àÂëµÄ½áµãÖ¸Õë.
-	std::queue<HuffmanNode*> QT;	// ±àÂë¹ı³ÌÖĞĞÎ³ÉµÄÊ÷Ö¸Õë.
+	std::queue<HuffmanNode*> QNODE;	// å¾…ç¼–ç çš„ç»“ç‚¹æŒ‡é’ˆ.
+	std::queue<HuffmanNode*> QTREE;	// ç¼–ç è¿‡ç¨‹ä¸­å½¢æˆçš„æ ‘æŒ‡é’ˆ.
 	
-	// index×÷Îª±àºÅ, Ö¸Ê¾µ±Ç°»áÊ¹ÓÃdata[index]´¦µÄ½áµã.
-	size_t index;		// ×¢ÒâÆä×÷ÓÃÓò²»½öÏŞÓÚÏÂÃæµÄforÑ­»·.
-	// ³õÊ¼·ÅÈën¿Ã½öÓĞ¸ù½áµãµÄÊ÷.
+	// indexä½œä¸ºç¼–å·, æŒ‡ç¤ºå½“å‰ä¼šä½¿ç”¨data[index]å¤„çš„ç»“ç‚¹.
+	size_t index;		// æ³¨æ„å…¶ä½œç”¨åŸŸä¸ä»…é™äºä¸‹é¢çš„forå¾ªç¯.
+	// åˆå§‹æ”¾å…¥næ£µä»…æœ‰æ ¹ç»“ç‚¹çš„æ ‘.
 	for (index = 0; index < P.size(); index++)
 	{
-		// ¶ÔÓ¦Ğè±àÂëµÄ·ûºÅ, ±àºÅÎª×ÔÈ»Êı.
+		// å¯¹åº”éœ€ç¼–ç çš„ç¬¦å·, ç¼–å·ä¸ºè‡ªç„¶æ•°.
 		data[index] = { P[index], index, NULL, NULL };
-		// ·ÅÈë¶ÓÁĞQNÖĞ.
-		QN.push(&data[index]);
+		// æ”¾å…¥é˜Ÿåˆ—QNODEä¸­.
+		QNODE.push(&data[index]);
 	}
-	// Ñ­»·´¦ÀíÒÔ¹¹½¨HuffmanÊ÷, Á½¸ö¶ÓÁĞÖĞÖ»Ê£ÏÂÒ»¸öÔªËØÊ±ÖÕÖ¹.
-	while (QN.size() + QT.size() > 1)
+	// å¾ªç¯å¤„ç†ä»¥æ„å»ºHuffmanæ ‘, ä¸¤ä¸ªé˜Ÿåˆ—ä¸­åªå‰©ä¸‹ä¸€ä¸ªå…ƒç´ æ—¶ç»ˆæ­¢.
+	while (QNODE.size() + QTREE.size() > 1)
 	{
-		// ÔÚÁ½¸ö¶ÓÁĞÖĞÈ¡³öÒÀ´ÎÈ¡³ö×îĞ¡Ôª×÷Îª×óÓÒº¢×Ó, ÓÅÏÈ´¦ÀíQNÖĞÔªËØÒÔ±£Ö¤Âë³¤·½²î×îĞ¡.
-		HuffmanNode* Childs[2];	// ×óÓÒº¢×ÓÖ¸Õë.
+		// åœ¨ä¸¤ä¸ªé˜Ÿåˆ—ä¸­å–å‡ºä¾æ¬¡å–å‡ºæœ€å°å…ƒä½œä¸ºå·¦å³å­©å­, ä¼˜å…ˆå¤„ç†QNODEä¸­å…ƒç´ ä»¥ä¿è¯ç é•¿æ–¹å·®æœ€å°.
+		HuffmanNode* Childs[2];	// å·¦å³å­©å­æŒ‡é’ˆ.
 		for (size_t i = 0; i < 2; ++i)
-			if (!QN.empty())
+			if (!QNODE.empty())
 			{
-				Childs[i] = QN.front();
-				// ÈôQT¶ÓÊ×È¨Öµ¸üĞ¡Ôò¸üĞÂ, ·ñÔòÈ¡QN¶ÓÊ×ÔªËØ.
-				if (!QT.empty() && QT.front()->weight < Childs[i]->weight)
+				Childs[i] = QNODE.front();
+				// è‹¥QTREEé˜Ÿé¦–æƒå€¼æ›´å°åˆ™æ›´æ–°, å¦åˆ™å–QNODEé˜Ÿé¦–å…ƒç´ .
+				if (!QTREE.empty() && QTREE.front()->weight < Childs[i]->weight)
 				{
-					Childs[i] = QT.front();
-					QT.pop();
+					Childs[i] = QTREE.front();
+					QTREE.pop();
 				}
 				else
-					QN.pop();
+					QNODE.pop();
 			} 
 			else
 			{
-				// QNÖĞÎŞÔªËØ, Ö±½ÓÈ¡QTÖĞ¶ÓÊ×ÔªËØ.
-				Childs[i] = QT.front();
-				QT.pop();
+				// QNODEä¸­æ— å…ƒç´ , ç›´æ¥å–QTREEä¸­é˜Ÿé¦–å…ƒç´ .
+				Childs[i] = QTREE.front();
+				QTREE.pop();
 			}
-		// ´¦ÀíĞÂ½áµãÊı¾İ, ±àºÅÍ³Ò»ÎªHC.size().
+		// å¤„ç†æ–°ç»“ç‚¹æ•°æ®, ç¼–å·ç»Ÿä¸€ä¸ºHC.size().
 		data[index] = { Childs[0]->weight + Childs[1]->weight, HC.size(), Childs[0], Childs[1] };
 		HuffmanNode* p = &data[index];
-		// ½«ĞÂÊ÷·ÅÈë¶ÓÁĞHTÖĞ.
-		QT.push(p);
-		// ±àºÅ¸üĞÂ, ÏÂ´ÎÊ¹ÓÃĞÂ½áµã.
+		// å°†æ–°æ ‘æ”¾å…¥é˜Ÿåˆ—HTä¸­.
+		QTREE.push(p);
+		// ç¼–å·æ›´æ–°, ä¸‹æ¬¡ä½¿ç”¨æ–°ç»“ç‚¹.
 		++index;
 	}
-	// ¸ù¾İQTÖĞËùÊ£µÄÎ¨Ò»HuffmanÊ÷½øĞĞ±àÂë.
-	CodingAll(QT.front(), "");
-	C = HC;		// ½«×îÖÕ±àÂë¸´ÖÆ¸øC
+	// æ ¹æ®QTREEä¸­æ‰€å‰©çš„å”¯ä¸€Huffmanæ ‘è¿›è¡Œç¼–ç .
+	CodingAll(QTREE.front(), "");
+	C = HC;		// å°†æœ€ç»ˆç¼–ç å¤åˆ¶ç»™C
 }
