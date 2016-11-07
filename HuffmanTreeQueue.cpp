@@ -28,7 +28,7 @@ void HuffmanTree::HuffmanCoding(std::vector<double>& P, std::vector<std::string>
 	// 对概率向量进行排序.
 	sort(P.begin(), P.end());
 	// 一次性给出所有在编码中会出现的结点.
-	std::vector <HuffmanNode> data(2 * P.size() - 1);
+	std::vector<HuffmanNode> data(2 * P.size() - 1);
 	std::queue<HuffmanNode*> QNODE;	// 待编码的结点指针队列.
 	std::queue<HuffmanNode*> QTREE;	// 编码过程中形成的树指针队列.
 	
