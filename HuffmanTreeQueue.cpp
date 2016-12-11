@@ -52,21 +52,21 @@ void HuffmanTree::HuffmanCoding(std::vector<double>& P, std::vector<std::string>
 	{
 		// 在两个队列中取出依次取出最小元作为左右孩子, 优先处理QNODE中元素以保证码长方差最小.
 		// 由于QNODE中有哨兵, 因此QNODE在循环过程中永远非空.
-		HuffmanNode* Childs[2];	// 左右孩子指针.
+		HuffmanNode* Children[2];	// 左右孩子指针.
 		for (size_t i = 0; i < 2; ++i)
 		{
-			Childs[i] = QNODE.front();
+			Children[i] = QNODE.front();
 			// 若QTREE队首权值更小则更新, 否则取QNODE队首元素.
-			if (!QTREE.empty() && QTREE.front()->weight < Childs[i]->weight)
+			if (!QTREE.empty() && QTREE.front()->weight < Children[i]->weight)
 			{
-				Childs[i] = QTREE.front();
+				Children[i] = QTREE.front();
 				QTREE.pop();
 			}
 			else
 				QNODE.pop();
 		}
 		// 处理新结点数据, 编号统一为HC.size(). index更新, 下次使用新结点.
-		data[index] = { Childs[0]->weight + Childs[1]->weight, HC.size(), Childs[0], Childs[1] };
+		data[index] = { Children[0]->weight + Children[1]->weight, HC.size(), Children[0], Children[1] };
 		HuffmanNode* p = &data[index++];
 		// 将新树放入队列QTREE中.
 		QTREE.push(p);
@@ -106,15 +106,15 @@ void HuffmanTree::HuffmanCoding(std::vector<double>& P, std::vector<std::string>
 	while (QNODE.size() + QTREE.size() > 1)
 	{
 		// 在两个队列中取出依次取出最小元作为左右孩子, 优先处理QNODE中元素以保证码长方差最小.
-		HuffmanNode* Childs[2];	// 左右孩子指针.
+		HuffmanNode* Children[2];	// 左右孩子指针.
 		for (size_t i = 0; i < 2; ++i)
 			if (!QNODE.empty())
 			{
-				Childs[i] = QNODE.front();
+				Children[i] = QNODE.front();
 				// 若QTREE队首权值更小则更新, 否则取QNODE队首元素.
-				if (!QTREE.empty() && QTREE.front()->weight < Childs[i]->weight)
+				if (!QTREE.empty() && QTREE.front()->weight < Children[i]->weight)
 				{
-					Childs[i] = QTREE.front();
+					Children[i] = QTREE.front();
 					QTREE.pop();
 				}
 				else
@@ -123,11 +123,11 @@ void HuffmanTree::HuffmanCoding(std::vector<double>& P, std::vector<std::string>
 			else
 			{
 				// QNODE中无元素, 直接取QTREE中队首元素.
-				Childs[i] = QTREE.front();
+				Children[i] = QTREE.front();
 				QTREE.pop();
 			}
 		// 处理新结点数据, 编号统一为HC.size().
-		data[index] = { Childs[0]->weight + Childs[1]->weight, HC.size(), Childs[0], Childs[1] };
+		data[index] = { Children[0]->weight + Children[1]->weight, HC.size(), Children[0], Children[1] };
 		HuffmanNode* p = &data[index];
 		// 将新树放入队列QTREE中.
 		QTREE.push(p);
