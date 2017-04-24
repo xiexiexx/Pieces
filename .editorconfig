@@ -1,3 +1,5 @@
 # http://EditorConfig.org
 
+[*.{h,cpp}]
+indent_style = space
 indent_size = 2
