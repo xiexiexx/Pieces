@@ -4,27 +4,27 @@
 #ifndef X_HUFFMAN_TREE
 #define X_HUFFMAN_TREE
 
-// HuffmanÊ÷½áµã¶¨Òå
+// Huffmanæ ‘ç»“ç‚¹å®šä¹‰
 struct HuffmanNode {
-	double weight;			// È¨Öµ
-	size_t number;			// ±àºÅ
-	// ÉèÔ­Ê¼·ûºÅ¹²N¸ö,ÎÒÃÇÒÔ±àºÅÇø·ÖÔ­Ê¼·ûºÅ½áµãºÍ±àÂë¹ı³ÌÖĞ³öÏÖµÄĞÂ½áµã,
-	// Ô­Ê¼·ûºÅ½áµã±àºÅÎª0µ½N - 1, ĞÂ½áµãÍ³Ò»±àºÅÎªN.
-	HuffmanNode* lChild;	// ×óº¢×Ó
-	HuffmanNode* rChild;	// ÓÒº¢×Ó
+  double weight;			// æƒå€¼
+  size_t number;			// ç¼–å·
+  // è®¾åŸå§‹ç¬¦å·å…±Nä¸ª,æˆ‘ä»¬ä»¥ç¼–å·åŒºåˆ†åŸå§‹ç¬¦å·ç»“ç‚¹å’Œç¼–ç è¿‡ç¨‹ä¸­å‡ºç°çš„æ–°ç»“ç‚¹,
+  // åŸå§‹ç¬¦å·ç»“ç‚¹ç¼–å·ä¸º0åˆ°N - 1, æ–°ç»“ç‚¹ç»Ÿä¸€ç¼–å·ä¸ºN.
+  HuffmanNode* lChild;	// å·¦å­©å­
+  HuffmanNode* rChild;	// å³å­©å­
 };
 
 class HuffmanTree {
 public:
-	// ±àÂëº¯Êı
-	void HuffmanCoding(std::vector<double>& P, std::vector<std::string>& C);
+  // ç¼–ç å‡½æ•°
+  void HuffmanCoding(std::vector<double>& P, std::vector<std::string>& C);
 private:
-	// ¸ù½áµã
-	HuffmanNode* root;
-	// µİ¹é±àÂëº¯Êı
-	void CodingAll(HuffmanNode* p, const std::string& prefix);
-	// ±£´æ±àÂëµÄÏòÁ¿HC
-	std::vector<std::string> HC;
+  // æ ¹ç»“ç‚¹
+  HuffmanNode* root;
+  // é€’å½’ç¼–ç å‡½æ•°
+  void CodingAll(HuffmanNode* p, const std::string& prefix);
+  // ä¿å­˜ç¼–ç çš„å‘é‡HC
+  std::vector<std::string> HC;
 };
 
 # endif	// X_HUFFMAN_TREE

@@ -1,31 +1,31 @@
 #include "vMatrix.h"
 // https://github.com/xiexiexx/DSAD/blob/master/Ch03/vMatrix.h
 
-// »ùÓÚFloyd-WarshallËã·¨ÅĞ¶ÏMarkovÁ´µÄ²»¿ÉÔ¼ĞÔ, PÎªµ¥²½¸ÅÂÊ×ªÒÆ¾ØÕó.
+// åŸºäºFloyd-Warshallç®—æ³•åˆ¤æ–­Markové“¾çš„ä¸å¯çº¦æ€§, Pä¸ºå•æ­¥æ¦‚ç‡è½¬ç§»çŸ©é˜µ.
 bool Irreducible(matrix<double> P)
 {
-	if (P.dimX() != P.dimY())	// ²»ÊÇ·½Õó±¨´í.
-		return false;
-	size_t n = P.dimX();
-	size_t count = 0;
-	for (size_t i = 0; i < n; ++i)
-		for (size_t j = 0; j < n; ++j)
-			if (P(i, j) > 0)		// Ô¤ÏÈÍ³¼ÆÕı¸ÅÂÊÖµ.
-				++count;
-			else if (P(i, j) < 0)	// ´æÔÚ¸ºÖµ±¨´í.
-				return false;
-	// Floyd-WarshallËã·¨.
-	for (size_t k = 0; k < n; ++k)
-	{
-		if (count == n * n)		// ÈôÈ«²¿¸ÅÂÊÎªÕıÔòÎª²»¿ÉÔ¼, ÌáÇ°·µ»Ø.
-			return true;
-		for (size_t i = 0; i < n; ++i)
-			for (size_t j = 0; j < n; ++j)
-				if (P(i, j) == 0 && P(i, k) > 0 && P(k, j) > 0)	// ¶ÌÂ·±í´ïÊ½.
-				{
-					P(i, j) = P(i, k) + P(k, j);	// ËæÒâ¸³ÖµÒ»¸öÕı¸ÅÂÊ.
-					++count;						// ¸ÃÔªËØ¾­Relax²Ù×÷´Ó0±äÎªÕı¸ÅÂÊÖµ²Å¼ÆÊı.
-				}
-	}
-	return (count == n * n) ? true : false;	// È«²¿¸ÅÂÊÖµÎªÕıÔò²»¿ÉÔ¼.
+  if (P.dimX() != P.dimY())	// ä¸æ˜¯æ–¹é˜µæŠ¥é”™.
+    return false;
+  size_t n = P.dimX();
+  size_t count = 0;
+  for (size_t i = 0; i < n; ++i)
+    for (size_t j = 0; j < n; ++j)
+      if (P(i, j) > 0)		// é¢„å…ˆç»Ÿè®¡æ­£æ¦‚ç‡å€¼.
+        ++count;
+      else if (P(i, j) < 0)	// å­˜åœ¨è´Ÿå€¼æŠ¥é”™.
+        return false;
+  // Floyd-Warshallç®—æ³•.
+  for (size_t k = 0; k < n; ++k)
+  {
+    if (count == n * n)		// è‹¥å…¨éƒ¨æ¦‚ç‡ä¸ºæ­£åˆ™ä¸ºä¸å¯çº¦, æå‰è¿”å›.
+      return true;
+    for (size_t i = 0; i < n; ++i)
+      for (size_t j = 0; j < n; ++j)
+        if (P(i, j) == 0 && P(i, k) > 0 && P(k, j) > 0)	// çŸ­è·¯è¡¨è¾¾å¼.
+        {
+          P(i, j) = P(i, k) + P(k, j);	// éšæ„èµ‹å€¼ä¸€ä¸ªæ­£æ¦‚ç‡.
+          ++count;						// è¯¥å…ƒç´ ç»Relaxæ“ä½œä»0å˜ä¸ºæ­£æ¦‚ç‡å€¼æ‰è®¡æ•°.
+        }
+  }
+  return (count == n * n) ? true : false;	// å…¨éƒ¨æ¦‚ç‡å€¼ä¸ºæ­£åˆ™ä¸å¯çº¦.
 }

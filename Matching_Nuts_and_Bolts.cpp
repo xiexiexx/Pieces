@@ -1,5 +1,5 @@
-// ÂİÄ¸ºÍÂİË¨ÎÊÌâ.
-// ÉîÈëÌÖÂÛ²Î¼û: http://www.wisdom.weizmann.ac.il/~naor/PUZZLES/nuts_solution.html.
+// èºæ¯å’Œèºæ “é—®é¢˜.
+// æ·±å…¥è®¨è®ºå‚è§: http://www.wisdom.weizmann.ac.il/~naor/PUZZLES/nuts_solution.html.
 
 #include <iostream>
 #include <vector>
@@ -10,32 +10,32 @@ using std::vector;
 using std::multiset;
 using std::sort;
 
-// »ùÓÚÅÅĞòµÄ°æ±¾:
-bool NutsBolts_Sort_Version(vector<int>& Nuts, vector<int>& Bolts)
+// åŸºäºæ’åºçš„ç‰ˆæœ¬.
+bool nuts_bolts_sort(vector<int>& nuts, vector<int>& bolts)
 {
-	if (Nuts.size() != Bolts.size())	// ³¤¶È²»ºÏ, ±ØÈ»²»Æ¥Åä!
-		return false;
-	sort(Nuts.begin(), Nuts.end());		// °´ÂİÄ¸¹æ¸ñÅÅĞò.
-	sort(Bolts.begin(), Bolts.end());	// °´ÂİË¨¹æ¸ñÅÅĞò.
-	size_t i = 0;
-	while (i < Nuts.size() && Nuts[i] == Bolts[i])	// ÉÆÓÃ¶ÌÂ·±í´ïÊ½½áÊøÑ­»·.
-		++i;										// ¹æ¸ñÆ¥ÅäÔò¼ÌĞøÉ¨Ãè.
-	return (i == Nuts.size()) ? true : false;		// ·µ»ØÆ¥Åä½á¹û.
+  if (nuts.size() != bolts.size())	// é•¿åº¦ä¸åˆ, å¿…ç„¶ä¸åŒ¹é…!
+    return false;
+  sort(nuts.begin(), nuts.end());		// æŒ‰èºæ¯è§„æ ¼æ’åº.
+  sort(bolts.begin(), bolts.end());	// æŒ‰èºæ “è§„æ ¼æ’åº.
+  size_t i = 0;
+  while (i < nuts.size() && nuts[i] == bolts[i])	// å–„ç”¨çŸ­è·¯è¡¨è¾¾å¼ç»“æŸå¾ªç¯.
+    ++i;										// è§„æ ¼åŒ¹é…åˆ™ç»§ç»­æ‰«æ.
+  return (i == nuts.size()) ? true : false;		// è¿”å›åŒ¹é…ç»“æœ.
 }
 
-// »ùÓÚ¶àÖØ¼¯ºÏµÄ°æ±¾:
-bool NutsBolts_Multiset_Version(vector<int>& Nuts, vector<int>& Bolts)
+// åŸºäºå¤šé‡é›†åˆçš„ç‰ˆæœ¬, è¿˜å¯ä»¥ä½¿ç”¨æ— åºæ˜ å°„å®¹å™¨è®¡æ•°å®Œæˆ.
+bool nuts_bolts_multiset(vector<int>& nuts, vector<int>& bolts)
 {
-	if (Nuts.size() != Bolts.size())	// ³¤¶È²»ºÏ, ±ØÈ»²»Æ¥Åä!
-		return false;
-	multiset<int> MS(Nuts.cbegin(), Nuts.cend());	// ½«ÂİÄ¸µÄ¹æ¸ñÈ«²¿·ÅÈë¶àÖØ¼¯ºÏ.
-	for (size_t i = 0; i < Bolts.size(); ++i)
-	{
-		auto iter = MS.find(Bolts[i]);				// ÔÚ¶àÖØ¼¯ºÏÖĞÑ°ÕÒµ±Ç°ÂİË¨¿ÉÊÊÅäµÄÂİÄ¸.
-		if (iter != MS.end())
-			MS.erase(iter);							// ÕÒµ½ÔòÉ¾³ı¶ÔÓ¦µÄÂİÄ¸.
-		else
-			break;									// Î´ÕÒµ½ÔòÌø³ö.
-	}
-	return (MS.size() == 0) ? true : false;			// ÒÔ¶àÖØ¼¯ºÏ×îºóµÄ´óĞ¡×÷ÎªÆ¥Åä½á¹û·µ»Ø.
+  if (nuts.size() != bolts.size())	// é•¿åº¦ä¸åˆ, å¿…ç„¶ä¸åŒ¹é…!
+    return false;
+  multiset<int> MS(nuts.cbegin(), nuts.cend());	// å°†èºæ¯çš„è§„æ ¼å…¨éƒ¨æ”¾å…¥å¤šé‡é›†åˆ.
+  for (size_t i = 0; i < bolts.size(); ++i)
+  {
+    auto iter = MS.find(bolts[i]);				// åœ¨å¤šé‡é›†åˆä¸­å¯»æ‰¾å½“å‰èºæ “å¯é€‚é…çš„èºæ¯.
+    if (iter != MS.end())
+      MS.erase(iter);							// æ‰¾åˆ°åˆ™åˆ é™¤å¯¹åº”çš„èºæ¯.
+    else
+      break;									// æœªæ‰¾åˆ°åˆ™è·³å‡º.
+  }
+  return (MS.size() == 0) ? true : false;			// ä»¥å¤šé‡é›†åˆæœ€åçš„å¤§å°ä½œä¸ºåŒ¹é…ç»“æœè¿”å›.
 }
